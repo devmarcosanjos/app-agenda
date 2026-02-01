@@ -8,9 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.marcosanjos.app_agenda.R
 import com.marcosanjos.app_agenda.model.Item
+import com.marcosanjos.app_agenda.ui.loadUrl
 
 class ItemAdapter(
-    private val items: List<Item>
+    private val items: List<Item>,
+    private val onItemClick: (Item) -> Unit
 ): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageView = view.findViewById<ImageView>(R.id.image)
@@ -33,6 +35,10 @@ class ItemAdapter(
         holder.fullNameTextView.text = item.value.fullName
         holder.ageTextView.text = holder.itemView.context.getString(R.string.item_age, item.value.age)
         holder.professionTextView.text = item.value.profession
+        holder.imageView.loadUrl(item.value.imageUrl)
+        holder.itemView.setOnClickListener {
+            onItemClick(item)
+        }
     }
 
     override fun getItemCount(): Int = items.size

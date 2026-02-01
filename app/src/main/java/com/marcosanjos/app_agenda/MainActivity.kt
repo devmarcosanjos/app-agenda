@@ -1,6 +1,7 @@
 package com.marcosanjos.app_agenda
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +23,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupView()
@@ -59,6 +59,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleOnSuccess(items: List<Item>) {
-        binding.recyclerView.adapter = ItemAdapter(items)
+        binding.recyclerView.adapter = ItemAdapter(items) {
+            item -> showItemDetails(item) // Handle item click
+        }
+    }
+
+    private fun showItemDetails(item: Item) {
+        Toast.makeText(this, "Clicked on ${item.value.fullName}", Toast.LENGTH_SHORT).show()
     }
 }
