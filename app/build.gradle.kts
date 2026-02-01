@@ -1,12 +1,11 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
     namespace = "com.marcosanjos.app_agenda"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.marcosanjos.app_agenda"
@@ -31,7 +30,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-
+    kotlinOptions {
+        jvmTarget = "11"
+    }
     buildFeatures {
         dataBinding = true
         viewBinding = true
@@ -39,7 +40,7 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.ktx) // Usando a versão definida no TOML (1.10.1 ou 1.17.0 dependendo da ref)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
@@ -49,6 +50,9 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.swiperefresh)
 
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.gson)
+    implementation(libs.okhttp.logging)
 
     testImplementation(libs.junit)
 
