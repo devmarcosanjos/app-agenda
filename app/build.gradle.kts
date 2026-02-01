@@ -47,6 +47,8 @@ dependencies {
 
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.swiperefresh)
+
 
     testImplementation(libs.junit)
 
